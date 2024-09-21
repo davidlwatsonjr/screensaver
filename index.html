@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screensaver</title>
+    <style>
+      html,
+      body {
+        background-color: black;
+        overflow: hidden;
+      }
+      #floater {
+        display: none;
+        position: absolute;
+        transition: left 5s linear, top 5s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <img id="floater" alt="Saving your screen" />
+    <script>
+      const floater = document.querySelector("#floater");
+
+      floater.addEventListener("load", ({ target: floater }) => {
+        const maxLeft = screen.width - floater.width;
+        const maxTop = screen.height - floater.height;
+
+        function updateFloaterPosition() {
+          const left = Math.random() * maxLeft - window.screenX;
+          const top = Math.random() * maxTop - window.screenY;
+
+          floater.style.left = `${left}px`;
+          floater.style.top = `${top}px`;
+        }
+
+        updateFloaterPosition();
+        floater.style.display = "block";
+        setTimeout(updateFloaterPosition, 0);
+        setInterval(updateFloaterPosition, 5000);
+      });
+
+      const params = location.search
+        .slice(1)
+        .split("&")
+        .map((param) => param.split("="))
+        .reduce((params, [key, value]) => {
+          params[key] = value;
+          return params;
+        }, {});
+
+      if (params.floater) {
+        floater.src = params.floater;
+      }
+    </script>
+  </body>
+</html>
