@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Screensaver</title>
     <style>
-      html,
-      body {
+      html {
         background-color: black;
         overflow: hidden;
       }
       #floater {
         display: none;
         position: absolute;
-        /* transition: left 5s linear, top 5s linear; */
       }
     </style>
   </head>
@@ -117,6 +115,14 @@
         floater.src = params.floater;
       } else {
         floater.src = localStorage.getItem("floater") || DEFAULT_FLOATER;
+      }
+
+      if (params.bgColor) {
+        localStorage.setItem("bgColor", params.bgColor);
+      }
+
+      if (localStorage.getItem("bgColor")) {
+        document.documentElement.style.backgroundColor = localStorage.getItem("bgColor");
       }
     </script>
   </body>
