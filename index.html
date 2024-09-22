@@ -13,7 +13,7 @@
       #floater {
         display: none;
         position: absolute;
-        transition: left 5s linear, top 5s linear;
+        /* transition: left 5s linear, top 5s linear; */
       }
     </style>
   </head>
@@ -24,40 +24,81 @@
         "https://storage.googleapis.com/public.davidlwatsonjr.com/headshot_100.jpg";
       const floater = document.querySelector("#floater");
 
+      const getStepValue = () => Math.floor(Math.random() * 4) + 2;
+
+      floater.addEventListener("load", ({ target: floater }) => {
+        let directionX = Math.random() < 0.5 ? 1 : -1;
+        let directionY = Math.random() < 0.5 ? 1 : -1;
+
+        let stepX = getStepValue();
+        let stepY = getStepValue();
+
+        const updateFloaterPosition = () => {
+          const overflowX = Math.max(
+            0,
+            window.screenX + window.outerWidth - screen.width,
+          );
+          const overflowY = Math.max(
+            0,
+            window.screenY - window.outerHeight - screen.height,
+          );
+
+          const leftSideChrome =
+            screen.width - window.innerWidth - overflowX - window.screenX;
+          const topSideChrome =
+            screen.height - window.innerHeight - overflowY - window.screenY;
+
+          const minLeft = -1 * (window.screenX + leftSideChrome);
+          const minTop = -1 * (window.screenY + topSideChrome);
+          const maxLeft = screen.width - leftSideChrome - floater.width;
+          const maxTop = screen.height - topSideChrome - floater.height;
+
+          if (floater.offsetLeft <= minLeft && directionX === -1) {
+            directionX = 1;
+            stepX = getStepValue();
+            stepY = getStepValue();
+          }
+
+          if (floater.offsetLeft >= maxLeft && directionX === 1) {
+            directionX = -1;
+            stepX = getStepValue();
+            stepY = getStepValue();
+          }
+
+          if (floater.offsetTop <= minTop && directionY === -1) {
+            directionY = 1;
+            stepX = getStepValue();
+            stepY = getStepValue();
+          }
+
+          if (floater.offsetTop >= maxTop && directionY === 1) {
+            directionY = -1;
+            stepX = getStepValue();
+            stepY = getStepValue();
+          }
+
+          const left = floater.offsetLeft + stepX * directionX;
+          const top = floater.offsetTop + stepY * directionY;
+
+          floater.style.left = `${left}px`;
+          floater.style.top = `${top}px`;
+        };
+
+        floater.style.display = "block";
+        updateFloaterPosition();
+        setInterval(updateFloaterPosition, 48);
+      });
+
+      floater.addEventListener("error", () => {
+        floater.src = DEFAULT_FLOATER;
+      });
+
       document.addEventListener("click", () => {
         if (document.fullscreenElement) {
           document.exitFullscreen();
         } else {
           document.documentElement.requestFullscreen();
         }
-      });
-
-      floater.addEventListener("load", ({ target: floater }) => {
-        const maxLeft = screen.width - floater.width;
-        const maxTop = screen.height - floater.height;
-
-        function updateFloaterPosition() {
-          const leftSideChrome =
-            screen.width - window.innerWidth - window.screenX;
-          const topSideChrome =
-            screen.height - window.innerHeight - window.screenY;
-
-          const left =
-            Math.random() * maxLeft - window.screenX - leftSideChrome;
-          const top = Math.random() * maxTop - window.screenY - topSideChrome;
-
-          floater.style.left = `${left}px`;
-          floater.style.top = `${top}px`;
-        }
-
-        updateFloaterPosition();
-        floater.style.display = "block";
-        setTimeout(updateFloaterPosition, 0);
-        setInterval(updateFloaterPosition, 5000);
-      });
-
-      floater.addEventListener("error", () => {
-        floater.src = DEFAULT_FLOATER;
       });
 
       const params = location.search
