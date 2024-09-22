@@ -13,6 +13,7 @@
         border-radius: 5%;
         display: none;
         position: absolute;
+        transition: left 0.05s linear, top 0.05s linear;
       }
     </style>
   </head>
@@ -95,7 +96,7 @@
 
         randomizePosition();
         floater.style.display = "block";
-        setInterval(updateFloaterPosition, 48);
+        setInterval(updateFloaterPosition, 50);
 
         localStorage.setItem("floater", floater.src);
       });
