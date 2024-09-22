@@ -88,6 +88,8 @@
         floater.style.display = "block";
         updateFloaterPosition();
         setInterval(updateFloaterPosition, 48);
+
+        localStorage.setItem("floater", floater.src);
       });
 
       floater.addEventListener("error", () => {
@@ -114,7 +116,7 @@
       if (params.floater) {
         floater.src = params.floater;
       } else {
-        floater.src = DEFAULT_FLOATER;
+        floater.src = localStorage.getItem("floater") || DEFAULT_FLOATER;
       }
     </script>
   </body>
