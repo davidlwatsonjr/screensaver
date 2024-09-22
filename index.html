@@ -27,8 +27,14 @@
         const maxTop = screen.height - floater.height;
 
         function updateFloaterPosition() {
-          const left = Math.random() * maxLeft - window.screenX;
-          const top = Math.random() * maxTop - window.screenY;
+          const leftSideChrome =
+            screen.width - window.innerWidth - window.screenX;
+          const topSideChrome =
+            screen.height - window.innerHeight - window.screenY;
+
+          const left =
+            Math.random() * maxLeft - window.screenX - leftSideChrome;
+          const top = Math.random() * maxTop - window.screenY - topSideChrome;
 
           floater.style.left = `${left}px`;
           floater.style.top = `${top}px`;
