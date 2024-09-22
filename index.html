@@ -20,6 +20,8 @@
   <body>
     <img id="floater" alt="Saving your screen" />
     <script>
+      const DEFAULT_FLOATER =
+        "https://storage.googleapis.com/public.davidlwatsonjr.com/headshot_100.jpg";
       const floater = document.querySelector("#floater");
 
       document.addEventListener("click", () => {
@@ -55,8 +57,7 @@
       });
 
       floater.addEventListener("error", () => {
-        floater.src =
-          "https://storage.googleapis.com/public.davidlwatsonjr.com/headshot_100.jpg";
+        floater.src = DEFAULT_FLOATER;
       });
 
       const params = location.search
@@ -71,8 +72,7 @@
       if (params.floater) {
         floater.src = params.floater;
       } else {
-        floater.src =
-          "https://storage.googleapis.com/public.davidlwatsonjr.com/headshot_100.jpg";
+        floater.src = DEFAULT_FLOATER;
       }
     </script>
   </body>
