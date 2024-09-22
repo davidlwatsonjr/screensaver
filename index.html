@@ -33,6 +33,15 @@
         let stepX = getStepValue();
         let stepY = getStepValue();
 
+        const randomizePosition = () => {
+          floater.style.left = `${Math.floor(
+            Math.random() * (window.innerWidth - floater.width),
+          )}px`;
+          floater.style.top = `${Math.floor(
+            Math.random() * (window.innerHeight - floater.height),
+          )}px`;
+        };
+
         const updateFloaterPosition = () => {
           const overflowX = Math.max(
             0,
@@ -84,8 +93,8 @@
           floater.style.top = `${top}px`;
         };
 
+        randomizePosition();
         floater.style.display = "block";
-        updateFloaterPosition();
         setInterval(updateFloaterPosition, 48);
 
         localStorage.setItem("floater", floater.src);
@@ -123,7 +132,8 @@
       }
 
       if (localStorage.getItem("bgColor")) {
-        document.documentElement.style.backgroundColor = localStorage.getItem("bgColor");
+        document.documentElement.style.backgroundColor =
+          localStorage.getItem("bgColor");
       }
     </script>
   </body>
