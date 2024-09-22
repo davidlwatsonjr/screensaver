@@ -24,11 +24,12 @@
         "https://storage.googleapis.com/public.davidlwatsonjr.com/headshot_100.jpg";
       const floater = document.querySelector("#floater");
 
+      const getInitialDirection = () => (Math.random() < 0.5 ? 1 : -1);
       const getStepValue = () => Math.floor(Math.random() * 4) + 2;
 
       floater.addEventListener("load", ({ target: floater }) => {
-        let directionX = Math.random() < 0.5 ? 1 : -1;
-        let directionY = Math.random() < 0.5 ? 1 : -1;
+        let directionX = getInitialDirection();
+        let directionY = getInitialDirection();
 
         let stepX = getStepValue();
         let stepY = getStepValue();
