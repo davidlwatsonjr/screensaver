@@ -22,6 +22,14 @@
     <script>
       const floater = document.querySelector("#floater");
 
+      document.addEventListener("click", () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          document.documentElement.requestFullscreen();
+        }
+      });
+
       floater.addEventListener("load", ({ target: floater }) => {
         const maxLeft = screen.width - floater.width;
         const maxTop = screen.height - floater.height;
