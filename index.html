@@ -54,6 +54,11 @@
         setInterval(updateFloaterPosition, 5000);
       });
 
+      floater.addEventListener("error", () => {
+        floater.src =
+          "https://storage.googleapis.com/public.davidlwatsonjr.com/headshot_100.jpg";
+      });
+
       const params = location.search
         .slice(1)
         .split("&")
