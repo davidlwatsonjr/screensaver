@@ -64,28 +64,28 @@
 
           const minLeft = -1 * (window.screenX + leftSideChrome);
           const minTop = -1 * (window.screenY + topSideChrome);
-          const maxLeft = screen.width - leftSideChrome - floater.width - 1;
-          const maxTop = screen.height - topSideChrome - floater.height;
+          const maxLeft = screen.width - leftSideChrome - floater.width - stepX;
+          const maxTop = screen.height - topSideChrome - floater.height - stepY;
 
-          if (floater.offsetLeft <= minLeft && directionX === -1) {
+          if (floater.offsetLeft < minLeft && directionX === -1) {
             directionX = 1;
             stepX = getStepValue();
             stepY = getStepValue();
           }
 
-          if (floater.offsetLeft >= maxLeft && directionX === 1) {
+          if (floater.offsetLeft > maxLeft && directionX === 1) {
             directionX = -1;
             stepX = getStepValue();
             stepY = getStepValue();
           }
 
-          if (floater.offsetTop <= minTop && directionY === -1) {
+          if (floater.offsetTop < minTop && directionY === -1) {
             directionY = 1;
             stepX = getStepValue();
             stepY = getStepValue();
           }
 
-          if (floater.offsetTop >= maxTop && directionY === 1) {
+          if (floater.offsetTop > maxTop && directionY === 1) {
             directionY = -1;
             stepX = getStepValue();
             stepY = getStepValue();
