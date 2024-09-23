@@ -12,8 +12,10 @@
       #floater {
         border-radius: 5%;
         display: none;
+        margin: 0;
         max-height: 320px;
         max-width: 320px;
+        padding: 0;
         position: absolute;
         transition: left 0.05s linear, top 0.05s linear;
       }
@@ -62,7 +64,7 @@
 
           const minLeft = -1 * (window.screenX + leftSideChrome);
           const minTop = -1 * (window.screenY + topSideChrome);
-          const maxLeft = screen.width - leftSideChrome - floater.width;
+          const maxLeft = screen.width - leftSideChrome - floater.width - 1;
           const maxTop = screen.height - topSideChrome - floater.height;
 
           if (floater.offsetLeft <= minLeft && directionX === -1) {
