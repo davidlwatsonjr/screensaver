@@ -62,8 +62,8 @@
           const topSideChrome =
             screen.height - window.innerHeight - overflowY - window.screenY;
 
-          const minLeft = -1 * (window.screenX + leftSideChrome);
-          const minTop = -1 * (window.screenY + topSideChrome);
+          const minLeft = -1 * (window.screenX + leftSideChrome - stepX);
+          const minTop = -1 * (window.screenY + topSideChrome - stepY);
           const maxLeft = screen.width - leftSideChrome - floater.width - stepX;
           const maxTop = screen.height - topSideChrome - floater.height - stepY;
 
